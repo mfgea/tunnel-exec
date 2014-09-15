@@ -1,0 +1,22 @@
+{
+  "name": "tunnel-exec",
+  "version": "0.1.0",
+  "description": "Runs a command through an ssh tunnel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.org/mfgea/tunnel-exec.git"
+  },
+  "keywords": [
+    "ssh",
+    "tunnel"
+  ],
+  "author": "Matias Gea <matigea@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "portfinder": "^0.2.1"
+  }
+}
