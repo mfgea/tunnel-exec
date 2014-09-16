@@ -71,8 +71,8 @@ function tunnelExec(options, callback) {
 
     // Sets arguments for the ssh command
     var args = [
-        '-p',
-        remotePort,
+        "-p",
+        params.remotePort,
         connectHost,
         "-L",
         params.localPort + ":" + params.targetHost + ':' + params.targetPort,
@@ -97,7 +97,7 @@ function tunnelExec(options, callback) {
         callback(new Error('Error establishing SSH connection'));
     }
 
-    function done() {
+    function close() {
         child.kill('SIGKILL');
     }
 
@@ -105,16 +105,16 @@ function tunnelExec(options, callback) {
     child.stderr.on('data', function bootload(data) {
 
         if (data.toString().match(/local forwarding listening/i)) {
-            clearTimeout(timeoutKillProcess)
-            child.stderr.removeListener('data', bootload)
+            clearTimeout(timeoutKillProcess);
+            child.stderr.removeListener('data', bootload);
 
             callback(null, {
-                params: params,
-                done: done
-            })
+                close: close,
+                params: params
+            });
         }
 
-    })
+    });
 }
 
 module.exports = tunnelExec;

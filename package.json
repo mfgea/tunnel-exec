@@ -1,14 +1,14 @@
 {
   "name": "tunnel-exec",
-  "version": "0.1.0",
-  "description": "Runs a command through an ssh tunnel",
+  "version": "0.1.1",
+  "description": "Opens an ssh tunnel and then executes some code while it's open",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.org/mfgea/tunnel-exec.git"
+    "url": "git://github.com/mfgea/tunnel-exec.git"
   },
   "keywords": [
     "ssh",
