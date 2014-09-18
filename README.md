@@ -44,6 +44,12 @@ ssh -p 22 -L 9009:host2.example.com:1234 -i ~/.ssh/id_rsa.pub myUser@example.com
 If the connection is not established within 30 seconds, the process stops with an error.
 
 
+*NOTE:*
+-------
+
+You should always call `tunnel.done()` when your function is finished. That way, the tunnel is closed and the process finished.
+
+
 License
 -------
 
