@@ -1,6 +1,6 @@
 {
   "name": "tunnel-exec",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Opens an ssh tunnel and then executes some code while it's open",
   "main": "index.js",
   "scripts": {
