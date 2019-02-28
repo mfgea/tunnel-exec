@@ -37,6 +37,9 @@ function tunnelExec(options, callback) {
         targetHost: null,
         targetPort: null,
 
+        // Enable compression
+        compression: false,
+
         // Connection timeout
         timeout: 15000
     };
@@ -104,6 +107,11 @@ function tunnelExec(options, callback) {
             args.push('-J');
             args.push(hops.join(','));
         }
+    }
+
+    // Compression support
+    if (params.compression) {
+        args.push('-C');
     }
 
     // Force native (english) language, so we can read debug messages correctly
