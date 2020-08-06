@@ -19,6 +19,14 @@ tunnelExec(
         user: 'myUser',
         identityFile: '~/.ssh/id_rsa.pub',
 
+        jumpHosts: [{
+          user: 'jumpUser', // Default: user || ''
+          host: 'jumpHost',
+          port: 1234 // Default: remotePort
+        }],
+
+        compression: true, // Default: false
+
         timeout: 30000
     },
     function(err, tunnel) {
@@ -38,7 +46,7 @@ tunnelExec(
 The previous options calls the ssh command as follows:
 
 ```bash
-ssh -p 22 -L 9009:host2.example.com:1234 -i ~/.ssh/id_rsa.pub myUser@example.com
+ssh -p 22 -L 9009:host2.example.com:1234 -i ~/.ssh/id_rsa.pub -J jumpUser@jumpHost:1234 -C myUser@example.com
 ```
 
 If the connection is not established within 30 seconds, the process stops with an error.

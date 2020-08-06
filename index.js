@@ -30,9 +30,15 @@ function tunnelExec(options, callback) {
         remoteHost: null,
         remotePort: 22,
 
+        // Jump hosts support. Hops will be used in the order of the array
+        jumpHosts: [],
+
         // Target host, will receive the commands executed through the tunnel
         targetHost: null,
         targetPort: null,
+
+        // Enable compression
+        compression: false,
 
         // Connection timeout
         timeout: 15000
@@ -84,6 +90,28 @@ function tunnelExec(options, callback) {
     if(params.identityFile){
         args.push('-i');
         args.push(params.identityFile);
+    }
+
+    // Jumps hosts support
+    if (params.jumpHosts) {
+        const hops = [];
+
+        params.jumpHosts.forEach((hop) => {
+            const { user = params.user || '', host, port = params.remotePort } = hop;
+
+            hops.push(`${user && `${user}@`}${host}:${port}`);
+        });
+
+        // If we have at least one jump host, we amend the CLI arguments to include -J hop1,hop2,hop3,...
+        if (hops.length > 0) {
+            args.push('-J');
+            args.push(hops.join(','));
+        }
+    }
+
+    // Compression support
+    if (params.compression) {
+        args.push('-C');
     }
 
     // Force native (english) language, so we can read debug messages correctly
